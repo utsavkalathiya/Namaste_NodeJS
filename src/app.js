@@ -2,22 +2,14 @@ const express = require("express");
 
 const app = express();
 
-app.use("/", (req, res) => {
-  res.send("Welcome to the Server!");
+app.get("/user", (req, res) => {
+  res.send({
+    username: "Utsav Kalathiya",
+    age: 23,
+    contry: "India",
+  });
 });
 
-app.use("/hello", (req, res) => {
-  res.send("Hello from the server");
-});
-
-app.use("/test", (req, res) => {
-  res.send("Server test is done");
-});
-
-app.use("/connect", (req, res) => {
-  res.send("server is connected successfully");
-});
-
-app.listen(3000, () => {
-  console.log("Server is listening successfully on 3000...");
+app.listen(7777, () => {
+  console.log("Server is listening successfully on 7777...");
 });
