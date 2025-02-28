@@ -23,30 +23,26 @@ const app = express();
 //   res.send("Data Deleted successfully...");
 // });
 
-app.get(
-  "/user",
-  (req, res, next) => {
-    // res.send("Response!!!");
-    console.log("Response...");
-    next();
-  },
-  (req, res, next) => {
-    res.send("2nd Response!!");
-    console.log("2nd Response...");
-    next();
-  },
-  (req, res, next) => {
-    res.send("3nd Response!!");
-    console.log("3nd Response...");
-    next();
-  },
-  (req, res, next) => {
-    res.send("4nd Response!!");
-    console.log("4nd Response...");
-    next();
+app.get("/admin/getAllData", (req, res) => {
+  const token = "xyz";
+  const isAuthorized = token == "xyz";
+  if (isAuthorized) {
+    res.send("All Data sent...");
+  } else {
+    res.status(401).send("Unauthorized access...");
   }
-);
+});
+
+app.get("/admin/deleteUser", (req, res) => {
+  const token = "xjhyz";
+  const isAuthorized = token == "xyz";
+  if (isAuthorized) {
+    res.send("User Deleted...");
+  } else {
+    res.status(401).send("Unauthorized access...");
+  }
+});
 
 app.listen(7777, () => {
-  console.log("Server is running....");
+  console.log("Server is running on 7777....");
 });
