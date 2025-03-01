@@ -23,24 +23,23 @@ const app = express();
 //   res.send("Data Deleted successfully...");
 // });
 
-app.get("/admin/getAllData", (req, res) => {
+app.use("/admin", (req, res, next) => {
   const token = "xyz";
-  const isAuthorized = token == "xyz";
-  if (isAuthorized) {
-    res.send("All Data sent...");
+  const isAminAuthorized = token == "xyz";
+
+  if (!isAminAuthorized) {
+    res.status(401).send("unauthorised request");
   } else {
-    res.status(401).send("Unauthorized access...");
+    next();
   }
 });
 
+app.get("/admin/getAllData", (req, res) => {
+  res.send("All Data sent...");
+});
+
 app.get("/admin/deleteUser", (req, res) => {
-  const token = "xjhyz";
-  const isAuthorized = token == "xyz";
-  if (isAuthorized) {
-    res.send("User Deleted...");
-  } else {
-    res.status(401).send("Unauthorized access...");
-  }
+  res.send("User Deleted...");
 });
 
 app.listen(7777, () => {
